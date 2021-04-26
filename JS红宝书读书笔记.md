@@ -140,25 +140,25 @@ ES6新变量和var作用域方面的区别：
 
 例如，对象结构如下:
 
-![图片描述](https://segmentfault.com/img/bVbqd7y)
+![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd7y)
 
 我们可以清楚地看到右边有一个“不可到达的块”。现在让我们看看**“标记并清除”**垃圾回收器如何处理它。
 
 **第一步标记根**
 
-![图片描述](https://segmentfault.com/img/bVbqd7V)
+![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd7V)
 
 **然后标记他们的引用**
 
-![图片描述](https://segmentfault.com/img/bVbqd71)
+![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd71)
 
-以及子孙代的引用:
+**以及子孙代的引用:**
 
-![图片描述](https://segmentfault.com/img/bVbqd8a)
+![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd8a)
 
-现在进程中不能访问的对象被认为是不可访问的，将被删除:
+**现在进程中不能访问的对象被认为是不可访问的，将被删除:**
 
-![图片描述](https://segmentfault.com/img/bVbqd8A)
+![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd8A)
 
 这就是垃圾收集的工作原理。JavaScript引擎应用了许多优化，使其运行得更快，并且不影响执行。
 
@@ -182,3 +182,6 @@ GC基于已分配对象的大小和数量来判断何时进行。
 4. 避免内存泄漏（不意外声明全局变量、避免使用内部闭包）。
 5. 使用静态分配和对象池（极端，很少使用）。
 
+## 第五章  基本引用类型
+
+​	引用值（对象）是某个特定引用类型的实例。
