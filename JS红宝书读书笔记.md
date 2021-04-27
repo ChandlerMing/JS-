@@ -185,3 +185,94 @@ GC基于已分配对象的大小和数量来判断何时进行。
 ## 第五章  基本引用类型
 
 ​	引用值（对象）是某个特定引用类型的实例。
+
+### 5.1	Date
+
+​	新建 Date 对象： 
+
+```js
+let  date = new Date("May 23, 2019");
+	
+let  date = new Date("5/23/2019");
+
+new Date() 中隐式调用了 Date.parse("May 23, 2019"); 将字符串转为时间戳。
+```
+
+​	新建 Date 对象（UTC）：
+
+```js
+let  date = new Date( 2019, 5, 23, 17, 55, 55 ); 
+
+new Date() 中隐式调用了 Date.UTC( 2019, 5, 23, 17, 55, 55 ); 将参数转为时间戳。
+```
+
+​	获取当前时间戳：
+
+```js
+let timeStamp = Date().now()
+```
+
+### 5.2	RegExp
+
+​	创建正则表达式的方法：
+
+```js
+let expression =  /pattern/flags;
+```
+
+​	其中 flags 的值可以如下：
+
+```js
+g	-全局匹配多次
+i	-不区分大小写
+m	-多行模式
+y	-粘附模式
+u	-Unicode模式
+s	-dotAll模式，表示元字符.匹配任何字符（包括\n或\r）
+
+eg	let pattern1 = /at/g; // 匹配字符串中所有的"at"
+	let pattern2 = /[bc]at/i; // 匹配第一个"bat"或"cat",忽略大小写
+	let pattern3 = /.at/gi; // 匹配所有以"at"结尾的三字符组合，忽略大小写
+	let pattern4 = /\.at/gi; // 匹配所有的".at"，忽略大小写	
+```
+
+​	正则的使用方法：
+
+​	1. exec()	提取
+
+```js
+let text = "cat, bat, sat, fat";
+
+let pattern = /.at/;	// 非全局
+let matches = pattern.exec(text);
+// 第一次
+matches.index	// 0
+matches[0]		// cat
+pattern.lastIndex	// 0
+// 第二次
+matches.index	// 0
+matches[0]		// cat
+pattern.lastIndex	// 0
+
+let pattern = /.at/g;	// 非全局
+let matches = pattern.exec(text);
+// 第一次
+matches.index	// 0
+matches[0]		// cat
+pattern.lastIndex	// 3
+// 第二次
+matches.index	// 5
+matches[0]		// cat
+pattern.lastIndex	// 8
+
+```
+
+2. test()	匹配
+
+```js
+let text = "000-00-0000";
+let pattern = /\d{3}-d{2}-\d{4}/;
+
+pattern.test(text);		// true
+```
+
