@@ -276,3 +276,5 @@ let pattern = /\d{3}-d{2}-\d{4}/;
 pattern.test(text);		// true
 ```
 
+正则详细语法：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions
+
