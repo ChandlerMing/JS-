@@ -278,3 +278,49 @@ pattern.test(text);		// true
 
 正则详细语法：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions
 
+### 5.3 原始值包装类型
+
+```js
+为什么 "some text".substring(2) 可以运行？字面量怎么可以像对象一样调用方法？
+原理：
+	以读模式访问字符串时，后台会进行这样的操作
+    1. let _str = new String("some text");
+	2. _str.substring(2);
+	3. _str = null;
+简而言之，就是临时创建一个对象对字面量进行包装，包装对象对 valueof(), toString() 等方法，使其可以有相应工具属性等；
+对于 布尔值 和 数值 而言，也是同样的过程。
+```
+
+Tips：
+
+Object 可作为工厂函数，根据不同参数返回不同的包装类型
+eg. 
+
+```js
+let obj1 = new String("some text");
+console.log( obj1 instanceof String ); // true
+
+let obj2 = new Object("some text");
+console.log( obj2 instanceof String ); // true
+
+let obj3 = new Object(1);
+console.log( obj2 instanceof number ); // true
+
+let obj4 = new Number(1);
+console.log( obj4 instanceof number ); // true
+```
+
+#### 5.3.1 Boolean
+
+所有原始值包装对象在被判断真假时，都会被认为是true
+eg.
+
+```js
+let falseObject = new Boolean(false);
+let result = falseObject && true;
+console.log(result); // true
+```
+
+所以不建议使用Boolean包装类型，容易产生歧义
+
+#### 5.3.2 
