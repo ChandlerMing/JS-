@@ -323,4 +323,81 @@ console.log(result); // true
 
 所以不建议使用Boolean包装类型，容易产生歧义
 
-#### 5.3.2 
+#### 5.3.2 Number
+
+#### 5.3.3 String
+
+1. JS字符
+
+   js字符采用两种 unicode 编码混合的策略：USC-2 和 UTF-16，实际上都是用两个字节（16位）来表示一个字符
+
+   ```js
+   使用 String.formCharCode() 由 utf-16 码元 => 字符 （编码）
+   使用 "stirng".charCodeAt() 由 字符 => utf-16 码元 （解码）
+   码元：字符在 unicode 字符集中的位置
+   ```
+
+   由于部分字符不在 utf-16 常规编码范围内，所以可以使用  ==charPointAt()== 代替 charCodeAt()
+
+2. nomalize()方法、
+
+   略
+
+3. 字符串操作方法
+
+   1）截取字符串：
+
+   ==splice==，substring，substr（三个API干类似的事情，推荐splice）
+
+   ```js
+   "string".splice(起始位置, 结束位置(不包括自己)) 
+   ```
+
+   注：当结束位置为负值时，结束位置 => 字符串长度+负值
+
+   2）字符位置：
+
+   ```js
+   // ==>
+   "string".indexOf('t')			// 从前往后找't'的下标
+   
+   // <==
+   "string".lastIndexOf('t')		// 从后往前查找't'的下标
+   
+   // 指定起点
+   "string".indexOf('t', 2)		// 从前往后找't'的下标, 从下标 2 往后
+   "string".lastIndexOf('t', 3)	// 从后往前查找't'的下标，从下标 3 往前
+   ```
+
+   3）字符串包含：
+
+   ```js
+   "string".startWith("")		// 字符串首匹配
+   "string".endWith("")		// 字符串尾匹配
+   "string".include("")		// 字符串包含匹配
+   
+   // 指定起点
+   ```
+
+   4）trim()
+
+   ```js
+   " string ".trim()			// "string"
+   " string ".trimLeft()		// "string "
+   " string ".trimRight()		// " string"
+   ```
+
+   5) repeat()
+
+   ```js
+   "na ".repeat(5)				// "na na na na na "
+   ```
+
+   6) 填充
+
+   ```js
+   "zqm".padStart(6)			// "   zqm"
+   "zqm".padStart(6, '.')			// "...zqm"
+   
+   // padEnd() 同理
+   ```
