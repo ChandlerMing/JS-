@@ -323,7 +323,47 @@ console.log(result); // true
 
 所以不建议使用Boolean包装类型，容易产生歧义
 
-#### 5.3.2 Number
+#### 5.3.2 Number类型
+
+重写了valueOf()、toLocaleString()和 toString()等方法，有几个主要工具函数：
+
+```js
+// 进制转换 toString()
+let num = 10
+num.toString() // "10"
+num.toString(2) // "1010"
+num.toString(8) // "12"
+num.toString(10) // "10"
+num.toString(16) // "a"
+
+// 格式化-四舍五入 toFixed()
+let num = 10
+num.toFixed(2) // "10.00"
+let num = 10.005
+num.toFixed(2) // "10.01"
+
+// 科学计数法 toExponential()
+let num = 10
+num.toExponential(1)  // "1.0e+1"
+
+// 自动toFixed()或者toExponential() toPrecision()
+let num = 99
+num.toPrecision(1) // "1e+2"
+num.toPrecision(2) // "99"
+num.toPrecision(3) // "99.0"
+
+// 判断是否是整数-ES6 Number.isInteger()
+Number.isInteger(1)    // true
+Number.isInteger(1.00) // true
+Number.isInteger(1.01) // false
+
+// 判断数字是否溢出-ES6 Number.isSafeInteger()
+// 范围：从 Number.MIN_SAFE_INTEGER(-2^53 + 1)到 Number.MAX_SAFE_INTEGER(2^53 - 1)
+Number.isSafeInteger(-1 * (2 ** 53))      // false
+Number.isSafeInteger(-1 * (2 ** 53) + 1)  // true
+Number.isSafeInteger(2 ** 53)             // false
+Number.isSafeInteger((2 ** 53) - 1)       // true
+```
 
 #### 5.3.3 String
 
