@@ -140,25 +140,25 @@ ES6新变量和var作用域方面的区别：
 
 例如，对象结构如下:
 
-![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd7y)
+![图片描述](.\JS红宝书读书笔记.assets\bVbqd7y)
 
 我们可以清楚地看到右边有一个“不可到达的块”。现在让我们看看**“标记并清除”**垃圾回收器如何处理它。
 
 **第一步标记根**
 
-![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd7V)
+![图片描述](.\JS红宝书读书笔记.assets\bVbqd7V)
 
 **然后标记他们的引用**
 
-![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd71)
+![图片描述](.\JS红宝书读书笔记.assets\bVbqd71)
 
 **以及子孙代的引用:**
 
-![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd8a)
+![图片描述](.\JS红宝书读书笔记.assets\bVbqd8a)
 
 **现在进程中不能访问的对象被认为是不可访问的，将被删除:**
 
-![图片描述](C:\Users\Admin_zqm\Desktop\笔记\JS红宝书读书笔记.assets\bVbqd8A)
+![图片描述](.\JS红宝书读书笔记.assets\bVbqd8A)
 
 这就是垃圾收集的工作原理。JavaScript引擎应用了许多优化，使其运行得更快，并且不影响执行。
 
@@ -323,7 +323,47 @@ console.log(result); // true
 
 所以不建议使用Boolean包装类型，容易产生歧义
 
-#### 5.3.2 Number
+#### 5.3.2 Number类型
+
+重写了valueOf()、toLocaleString()和 toString()等方法，有几个主要工具函数：
+
+```js
+// 进制转换 toString()
+let num = 10
+num.toString() // "10"
+num.toString(2) // "1010"
+num.toString(8) // "12"
+num.toString(10) // "10"
+num.toString(16) // "a"
+
+// 格式化-四舍五入 toFixed()
+let num = 10
+num.toFixed(2) // "10.00"
+let num = 10.005
+num.toFixed(2) // "10.01"
+
+// 科学计数法 toExponential()
+let num = 10
+num.toExponential(1)  // "1.0e+1"
+
+// 自动toFixed()或者toExponential() toPrecision()
+let num = 99
+num.toPrecision(1) // "1e+2"
+num.toPrecision(2) // "99"
+num.toPrecision(3) // "99.0"
+
+// 判断是否是整数-ES6 Number.isInteger()
+Number.isInteger(1)    // true
+Number.isInteger(1.00) // true
+Number.isInteger(1.01) // false
+
+// 判断数字是否溢出-ES6 Number.isSafeInteger()
+// 范围：从 Number.MIN_SAFE_INTEGER(-2^53 + 1)到 Number.MAX_SAFE_INTEGER(2^53 - 1)
+Number.isSafeInteger(-1 * (2 ** 53))      // false
+Number.isSafeInteger(-1 * (2 ** 53) + 1)  // true
+Number.isSafeInteger(2 ** 53)             // false
+Number.isSafeInteger((2 ** 53) - 1)       // true
+```
 
 #### 5.3.3 String
 
