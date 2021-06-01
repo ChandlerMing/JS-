@@ -36,4 +36,4 @@ function sort_ES6(arr) {
   
 }
 
-judge(sort_ES6);
+judge(sort);
