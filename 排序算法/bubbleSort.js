@@ -1,5 +1,14 @@
 const judge = require("./judge");
 
+/*
+  Core: compare the near two item and swap it if necessary
+  Space complexity: O(1)
+  Time complexity:
+    Best: O(n)
+    Worst: O(n^2)
+    Average: O(n^2)
+*/
+
 // bubbleSort 
 function sort(arr) {
   const size = arr.length;
@@ -26,7 +35,7 @@ function sort_ES6(arr) {
     boundary = 0;
     for ( let i = 0; i < curBoundary; i++ ) {
       if ( arr[i] > arr[i + 1] ) {
-        [ arr[i], arr[i + 1] ] = [ arr[i+1], arr[i] ]; //Howerver, Destructuring makes performance bad
+        [ arr[i], arr[i + 1] ] = [ arr[i+1], arr[i] ]; //Howerver, destructuring makes performance bad
         boundary = i;
       }
     }
