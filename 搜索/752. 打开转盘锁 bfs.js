@@ -53,4 +53,4 @@ var openLock = function (deadends, target) {
   return res;
 };
 
-console.log(openLock(["0201","0101","0102","1212","2002"],"0202"));
+console.log(openLock(["0201", "0101", "0102", "1212", "2002"], "0202"));

@@ -35,9 +35,8 @@
       }
     }
   }
-  let step = 0;
+  let step = 1;
   while (bfs.length) {
-    step++;
     let nodes = bfs.length
     while (nodes--) {
       const cur = bfs.shift(), i = cur[0], j = cur[1];
@@ -55,5 +54,6 @@
         grid[di][dj] = 2; // 找了一个通宵的bug在这里 之前是 grid[i][j]
       }
     }
+    step++;
   }
 };
