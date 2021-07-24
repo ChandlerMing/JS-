@@ -1,6 +1,7 @@
 function debounce(fn, delay) {
   let timer;
-  return (...args) => {
+  // return (...args) => { 不能使用箭头函数 否则调用的时候 this 将指向 windows
+  return function(...args) {
     if (timer) {
       clearTimeout(timer);
     }
