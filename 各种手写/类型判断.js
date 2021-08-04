@@ -7,6 +7,7 @@ console.log(type(' '));
 console.log(type(true));
 console.log(type({}));
 console.log(type(()=>{}));
+console.log(type([]));
 console.log(type(undefined));
 console.log(type(null));
 console.log(type(Symbol()));
