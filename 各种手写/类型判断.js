@@ -8,6 +8,8 @@ console.log(type(true));
 console.log(type({}));
 console.log(type(()=>{}));
 console.log(type([]));
+console.log(type(new Map()));
+console.log(type(new Set()));
 console.log(type(undefined));
 console.log(type(null));
 console.log(type(Symbol()));
