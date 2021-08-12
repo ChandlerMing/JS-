@@ -441,3 +441,29 @@ Number.isSafeInteger((2 ** 53) - 1)       // true
    
    // padEnd() 同理
    ```
+   
+   7) 字符串大小写转换
+   
+   ```js
+   'ZQM'.toLowerCase()			// "zqm"
+   'zqm'.toUpperCase()			// "ZQM"
+   ```
+   
+   8) 字符串匹配（涉及正则，先简单了解）
+   
+   ```js
+   let text = 'cat, bat, sat, fat'
+   
+   // match
+   let matches = text.match(/.at/)
+   matches.index 				// 0
+   matches[0]					// "cat"
+   
+   // replace
+   text.replace('at', 'ond')	// "cond, bat, sat, fat"
+   text.replace(/at/g, 'ond')	// "cond, bond, sond, fond"
+   ```
+   
+
+### 5.4 单例内置对象
+
