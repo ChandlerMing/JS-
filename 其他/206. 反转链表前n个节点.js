@@ -23,6 +23,7 @@ var reverseList = function (head, n) {
     head.next = null;
     return head;
   }
+  // test
   reverse(head, n);
   return newHead;
 };
