@@ -12,19 +12,18 @@ function ListNode(val, next) {
  */
 // Recursion
 var reverseList = function (head, n) {
-  let newHead = null;
+  let successor = null;
   function reverse(head, n) {
-    if (head.next === null || n <= 1) {
-      newHead = head;
+    if (n === 1 || !head.next) {
+      successor = head.next;
       return head;
     }
-    n--;
-    reverse(head.next, n).next = head;
-    head.next = null;
-    return head;
+    let last = reverse(head.next, n - 1)
+    head.next.next = head;
+    head.next = successor;
+    return last;
   }
-  // test
-  reverse(head, n);
+  const newHead = reverse(head, n);
   return newHead;
 };
 
@@ -39,6 +38,7 @@ var reverseList = function (head, n) {
 //     cur = next;
 //     n--
 //   }
+//   head.next = cur;
 //   return pre;
 // };
 
@@ -70,4 +70,4 @@ function buildList(arr) {
 
 let list = buildList(arr);
 
-console.log(reverseList(list, 1));
+console.log(reverseList(list, 8));
