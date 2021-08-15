@@ -11,18 +11,18 @@ function TreeNode(val, left, right) {
  * @return {boolean}
  */
 // Recursion
-// var isSymmetric = function (root) {
-//   function judge(leftNode, rightNode) {
-//     if (!leftNode && !rightNode) {
-//       return true;
-//     } else if (!leftNode || !rightNode) {
-//       return false;
-//     } else {
-//       return leftNode.val === rightNode.val && judge(leftNode.left, rightNode.right) && judge(leftNode.right, rightNode.left);
-//     }
-//   }
-//   return judge(root, root);
-// };
+var isSymmetric = function (root) {
+  function judge(leftNode, rightNode) {
+    if (!leftNode && !rightNode) {
+      return true;
+    } else if (!leftNode || !rightNode) {
+      return false;
+    } else {
+      return leftNode.val === rightNode.val && judge(leftNode.left, rightNode.right) && judge(leftNode.right, rightNode.left);
+    }
+  }
+  return judge(root, root);
+};
 
 // Iteration
 var isSymmetric = function (root) {
