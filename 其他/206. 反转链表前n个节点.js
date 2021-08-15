@@ -28,19 +28,19 @@ var reverseList = function (head, n) {
 };
 
 // Iteration
-// var reverseList = function (head, n) {
-//   let pre = null;
-//   let cur = head;
-//   while (cur && n > 0) {
-//     const next = cur.next;
-//     cur.next = pre;
-//     pre = cur;
-//     cur = next;
-//     n--
-//   }
-//   head.next = cur;
-//   return pre;
-// };
+var reverseList = function (head, n) {
+  let pre = null;
+  let cur = head;
+  while (cur && n > 0) {
+    const next = cur.next;
+    cur.next = pre;
+    pre = cur;
+    cur = next;
+    n--
+  }
+  head.next = cur;
+  return pre;
+};
 
 let arr = [1, 2, 3, 4, 5]
 
@@ -70,4 +70,4 @@ function buildList(arr) {
 
 let list = buildList(arr);
 
-console.log(reverseList(list, 8));
+console.log(reverseList(list, 3));
