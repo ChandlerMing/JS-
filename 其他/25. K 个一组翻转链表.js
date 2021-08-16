@@ -11,19 +11,27 @@
  * @return {ListNode}
  */
 // Recursion
-var reverseList = function (head) {
-  let newHead = null;
-  function reverse(head) {
-    if (head.next === null) {
-      newHead = head;
+var reverseKGroup = function (head, n) {
+  let end = head;
+  for (let i = 0; i < n; i++) {
+    if (!end) {
       return head;
     }
-    reverse(head.next).next = head;
-    head.next = null;
-    return head;
+    end = end.next;
   }
-  reverse(head);
-  return newHead;
+  // let curStart = head;
+  function reverse(head, end) {
+    if (head.next === end) {
+      return head;
+    }
+    let last = reverse(head.next, end);
+    head.next.next = head
+    head.next = null;
+    return last;
+  }
+  let res = reverse(head, end)
+  head.next = reverseKGroup(end, n);
+  return res;
 };
 
 // Iteration
