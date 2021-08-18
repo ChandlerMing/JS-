@@ -6,18 +6,23 @@ function debounce(fn, delay) {
       clearTimeout(timer);
     }
     timer = setTimeout(() => {
-      fn(...args)
+      fn.apply(this, args)
     }, delay)
   }
 }
 
-function test(content) {
-  console.log(new Date().getTime(), content);
+function test() {
+  console.log(this.name);
 }
 
 const test1 = debounce(test, 1000);
 
+const a = {
+  name: 'zqm',
+  test1
+}
+
 for (let i = 0; i < 10000; i++) {
   console.log(new Date().getTime());
-  test1(111);
+  a.test1();
 }

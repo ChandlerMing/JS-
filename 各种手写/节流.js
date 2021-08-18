@@ -5,7 +5,7 @@ function throttle(fn, time) {
     if (!flag) {
       return;
     }
-    fn(...args);
+    fn.apply(this, args);
     flag = false;
     setTimeout(() => {
       flag = true;
@@ -22,7 +22,3 @@ const test1 = throttle(test, 1000)
 setInterval(()=>{
   test1(111)
 }, 100)
-
-
-
-
