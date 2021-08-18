@@ -25,14 +25,14 @@ MyPromise.prototype.then = function (onResolved) {
 new MyPromise((resolve) => {
   setTimeout(() => {
     resolve(1);
-  }, 500);
+  }, 1500);
 })
-  .then((res) => {
+  .then(res => {
     console.log(res);
     return new MyPromise((resolve) => {
       setTimeout(() => {
         resolve(2);
-      }, 500);
+      }, 1500);
     });
   })
-  .then(console.log);
+  .then(res => console.log(res));
