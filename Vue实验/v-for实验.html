@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>v-for实验</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <div v-for="(item,index) in items" style="display: flex;"> -->
+    <!-- <div v-for="(item,index) in items" :key="index" style="display: flex;"> -->
+    <div v-for="(item,index) in items" :key="item.name" style="display: flex;">
+      <div style="width: 100px;">{{ item.name }} : {{ item.value}}</div>
+      <input v-model="item.value" type="text">
+      <button @click="handleDelete(index)">delete</button>
+    </div>
+    <button @click="handleAdd">add</button>
+  </div>
+</body>
+
+<script>
+  new Vue({
+    el: '#app',
+    data() {
+      return {
+        items: [
+          { name: 1, value: 1 },
+          { name: 2, value: 2 },
+          { name: 3, value: 3 },
+          { name: 4, value: 4 },
+          { name: 5, value: 5 },
+        ]
+      }
+    },
+    methods: {
+      handleDelete(index) {
+        this.items.splice(index, 1)
+      },
+      handleAdd() {
+        this.items.unshift({ name: 0, value: 0 })
+      }
+    }
+  })
+</script>
+
+</html>
