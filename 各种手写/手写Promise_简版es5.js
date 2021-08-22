@@ -3,7 +3,7 @@ function MyPromise(fn) {
   const resolve = (value) => {
     setTimeout(() => {
       this.data = value;
-      this.cbs.forEach((cb) => cb(value));
+      this.cbs.forEach((cb) => cb());
     });
   }
   fn(resolve);
