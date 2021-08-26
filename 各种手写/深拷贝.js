@@ -1,18 +1,24 @@
 function clone(source, map = new WeakMap()) {
   if (typeof source === 'object' && source !== null) {
     let cloneTarget = Array.isArray(source) ? [] : {};
-    if (source instanceof Date || source instanceof RegExp || source instanceof Set || source instanceof Map) {
+    if (source instanceof Date || source instanceof RegExp || source instanceof Set || source instanceof Map || typeof source === 'symbol') {
       cloneTarget = new source.constructor(source);
     }
     if (map.get(source)) {
       return map.get(source);
     }
     map.set(source, cloneTarget);
-    for (const key in source) {
+    let keys = Reflect.ownKeys(source);
+    for (const key of keys) {
       if (source.hasOwnProperty(key)) {
         cloneTarget[key] = clone(source[key], map);
       }
     }
+    // for (const key in source) {
+    //   if (source.hasOwnProperty(key)) {
+    //     cloneTarget[key] = clone(source[key], map);
+    //   }
+    // }
     return cloneTarget;
   } else {
     return source;
@@ -38,6 +44,7 @@ let source = {
   regexp: new RegExp("\\w+"),
   set: new Set([1, 2, 3]),
   map: new Map([[1, 1], [2, 2], [3, 3]]),
+  [Symbol(0)]: 'symbol'
 }
 // source.son.parent = source
 
