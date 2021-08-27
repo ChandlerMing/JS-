@@ -5,7 +5,7 @@ function flatten(arr) {
   arr.forEach(value => {
     const isArray = Object.prototype.toString.call(value).split(' ').pop().slice(0, -1) === 'Array';
     if (isArray) {
-      res = res.concat(...flatten(value))
+      res = res.concat(flatten(value))
     } else {
       res.push(value)
     }
