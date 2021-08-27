@@ -23,7 +23,7 @@ CORS (Cross Origin Resource Share) 用于解决跨域。
 - 在请求 Header 中加入一个 Origin 字段，表明当前请求的来源（协议 + 域名 + 端口）。
 
 - 如果 Origin 在服务器指定的域名请求范围内， 响应 Header 中会加上 **Access-Control-Allow-Origin**、**Access-Control-Allow-Credentials**、**Access-Control-Expose-Headers** 等字段，分别表示允许的 **Origin** 范围（请求 header 中对应的值 / *），是否允许携带Cookie（只能设置为true表示开启，且发送端需要在Ajax中打开withCredentials属性，想要false干脆就返回这个Header）,想要获取的额外 Header 字段（默认只有Cache-Control`、`Content-Language`、`Content-Type`、`Expires`、`Last-Modified`、`Pragma）等。
-- 如果返回的 **Access-Control-Allow-Origin** 和 **Origin **中不匹配， 则触发`XMLHttpRequest`对象的`onerror`回调函数。
+- 如果返回的 **Access-Control-Allow-Origin** 和 **Origin** 中不匹配， 则触发`XMLHttpRequest`对象的`onerror`回调函数。
 
 ## 2. 复杂请求
 
