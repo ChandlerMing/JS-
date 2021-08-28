@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Composited layer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <style type="text/css">
+        body {
+            font-family: 'Helvetica Neue', 'Microsoft Yahei', sans-serif;
+        }
+        @-webkit-keyframes move {
+              0% { -webkit-transform:translateX(0px) }
+             50% { -webkit-transform:translateX(10px) }
+            100% { -webkit-transform:translateX(0px) }
+        }
+        @-moz-keyframes move {
+              0% { -moz-transform:translateX(0px) }
+             50% { -moz-transform:translateX(10px) }
+            100% { -moz-transform:translateX(0px) }
+        }
+        @-o-keyframes move {
+              0% { -o-transform:translateX(0px) }
+             50% { -o-transform:translateX(10px) }
+            100% { -o-transform:translateX(0px) }
+        }
+        @keyframes move {
+              0% { transform:translateX(0px) }
+             50% { transform:translateX(10px) }
+            100% { transform:translateX(0px) }
+        }
+        #title {
+            -webkit-animation: move 1s linear infinite;
+            -moz-animation: move 1s linear infinite;
+            -o-animation: move 1s linear infinite;
+            animation: move 1s linear infinite;
+            /*position: relative;
+            z-index: 1;*/
+        }
+        h1 {
+            font-size: 20px;
+        }
+        a {
+            color: #888;
+            text-decoration: none;
+        }
+        div {
+            overflow: hidden;
+        }
+        ul {
+            margin: 5px;
+            padding: 0;
+        }
+        li {
+            position: relative;
+            height: 30px;
+            overflow: hidden;
+            border-top: 1px dotted #ccc;
+            padding: 5px 20px 5px 40px;
+            font-size: 20px;
+        }
+        img {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 3px;
+            top: 4px;
+            border: 1px solid #ccc;
+        }
+        time {
+            position: absolute;
+            right: 5px;
+            top: 4px;
+            font-size: 12px;
+            color: #999;
+        }
+        label {
+            display: block;
+            margin: 10px 5px;
+            color: red;
+        }
+        input {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 id="title">请使用具备『硬件加速』功能的『安卓』手机浏览此页面</h1>
+        <label>
+            <input type="checkbox" onchange="setZIndex(this)"> 为动画元素设置z-index
+        </label>
+    </div>
+    <ul id="list"></ul>
+    <script>
+        // 处理query
+        var query = (function(query){
+            var q = {};
+            query = query.replace(/^\?+/, '');
+            if(query){
+                query.split('&').forEach(function(i){
+                    i = i.split('=');
+                    q[i[0]] = i[1];
+                });
+            }
+            return q;
+        })(location.search);
+    </script>
+    <script>
+        var $ = function(selector){
+            return document.querySelector(selector);
+        };
+    </script>
+    <script>
+        
+        var setZIndex = function(checkbox){
+            var title = $('#title');
+            if(checkbox.checked){
+                title.style.position = 'relative';
+                title.style.zIndex = 1;
+            } else {
+                title.style.position = 'static';
+            }
+        };
+        // 生成DOM
+        var template = function(i){
+            return [
+                '<li class="album-item">',
+                    '<img src="assets/' + (i % 16) + '.png"/>',
+                    'hello world',
+                    '<time>2015-09</time>',
+                '</li>'
+            ].join('');
+        };
+        var size = parseInt(query.size) || 2000;
+        var html = '';
+        for(var i = 0; i < size; i++){
+            html += template(i);
+        }
+        $('#list').innerHTML = html;
+    </script>
+</body>
+</html>
