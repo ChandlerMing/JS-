@@ -6,8 +6,7 @@ let data = {
 }
 
 function transform(str, data) {
-  let _str = str.replace(/\{\{(\w+)\}\}/g, '$1')
-  console.log(_str)
+  return str.replace(/\{\{(.*?)\}\}/g, (match, key) => data[key.trim()] || '')
 }
 
-console.log(transform(temp,data))
+console.log(transform(temp, data))
