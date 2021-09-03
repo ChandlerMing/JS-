@@ -1,14 +1,14 @@
-let str = '699999999';
+let str = '699999999.99';
 
 function solve1(str) {
-  let arr = str.split('').reverse();
+  let arr = str.split('.')[0].split('').reverse();
   return arr.reduce((acc, cur, index) => {
-    return (index  % 3 === 0) ? (cur + ',' + acc) : (cur + '' + acc); 
-  })
+    return (index % 3 === 0) ? (cur + ',' + acc) : (cur + '' + acc);
+  }) + '.' + str.split('.')[1]
 }
 
 function solve2(str) {
-  let _str = str.replace(/(?!^)(?=(\d{3})+$)/g, ',');
+  let _str = str.replace(/\B(?=(\d{3})+\b)/g, ',');
   return _str;
 }
 
