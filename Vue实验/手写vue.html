@@ -9,34 +9,46 @@
 </head>
 
 <body>
-  <h1 id="app"></h1>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <input v-model="name">
+    <h1>{{name}}</h1>
+    <button v-on:click="clickMe">click me!</button>
+  </div>
 </body>
 
 <script>
   // 主类
-  function MyVUe(data, el, exp) {
-    this.data = data;
-    // 递归响应式
-    observe(data);
-    el.innerHTML = this.data[exp];
-    // 添加依赖()
-    new Watcher(this, exp, (value) => {
-      el.innerHTML = value;
-    })
+  function MyVue(options) {
+    this.vm = this;
+    this.data = options.data;
+    this.methods = options.methods;
+    // Object.keys(this.data).forEach((key) => {
+    //   this.proxyKeys(key);
+    // });
+    observe(this.data);
+    new Complie(options.el, this.vm)
+    options.mounted.call(this);
     return this;
   }
+  // MyVue.prototype = {
+  //   proxyKeys(key) {
+  //     Object.defineProperty(this, key, {
+  //       enumerable: true,
+  //       configurable: true,
+  //       get() {
+  //         return this.data[key];
+  //       },
+  //       set(val) {
+  //         this.data[key] = val;
+  //       }
+  //     })
+  //   }
+  // }
 
-  function observe(data) {
-    if (!data || typeof data !== 'object') {
-      return;
-    }
-    Object.keys(data).forEach(key => {
-      defineReactive(data, key, data[key]);
-    })
-  }
   function Dep() {
     this.subs = [];
-    this.target = null;
+    Dep.target = null;
   }
   Dep.prototype = {
     addSub(sub) {
@@ -48,26 +60,44 @@
       })
     }
   }
-  function defineReactive(data, key, value) {
-    observe(value);
-    let dep = new Dep();
-    Object.defineProperty(data, key, {
-      enumerable: true,
-      configurable: true,
-      get() {
-        if (Dep.target) {
-          dep.addSub(Dep.target);
+
+  function observe(value) {
+    if (!value || typeof value !== 'object') {
+      return;
+    }
+    return new Observer(value);
+  };
+  function Observer(data) {
+    this.data = data;
+    this.walk(data);
+  }
+  Observer.prototype = {
+    walk(data) {
+      Object.keys(data).forEach((key) => {
+        this.defineReactive(data, key, data[key]);
+      })
+    },
+    defineReactive(data, key, val) {
+      const dep = new Dep();
+      const childObj = observe(val);
+      Object.defineProperty(data, key, {
+        enumerableL: true,
+        configurable: true,
+        get() {
+          if (Dep.target) {
+            dep.addSub(Dep.target)
+          }
+          return val;
+        },
+        set(newVal) {
+          if (newVal === val) {
+            return;
+          }
+          val = newVal;
+          dep.notify();
         }
-        return value;
-      },
-      set(newVal) {
-        if (newVal === value) {
-          return;
-        }
-        value = newVal;
-        dep.notify();
-      }
-    })
+      });
+    }
   }
 
   function Watcher(vm, exp, cb) {
@@ -97,16 +127,128 @@
     }
   }
 
-  let el = document.querySelector('#app');
-  let myVue = new MyVUe({
-    name: 'hello world'
-  }, el, 'name');
+  function Complie(el, vm) {
+    this.vm = vm;
+    this.el = document.querySelector(el);
+    this.fragment = null;
+    this.init();
+  }
+  Complie.prototype = {
+    init() {
+      if (this.el) {
+        this.fragment = this.nodeToFragment(this.el);
+        this.complie(this.fragment);
+        this.el.appendChild(this.fragment);
+      } else {
+        throw Error('Mount DOM ERROR');
+      }
+    },
+    nodeToFragment(el) {
+      let fragment = document.createDocumentFragment();
+      let child = el.firstChild;
+      while (child) {
+        fragment.appendChild(child);
+        child = el.firstChild;
+      }
+      return fragment;
+    },
+    complie(el) {
+      let childNodes = el.childNodes; // NodeList Object
+      Array.prototype.slice.call(childNodes).forEach(node => {
+        let regexp = /\{\{\s*(.*)\s*\}\}/;
+        let text = node.textContent;
+        if (this.isElementNode(node)) {
+          this.complieElement(node);
+        } else if (this.isTextNode(node) && regexp.test(text)) {
+          this.complieText(node, regexp.exec(text)[1]);
+        }
+        if (node.childNodes && node.childNodes.length) {
+          this.complie(node);
+        }
+      })
+    },
+    isElementNode(node) {
+      return node.nodeType === 1;
+    },
+    isTextNode(node) {
+      return node.nodeType === 3;
+    },
+    isDirective(attr) {
+      return attr.includes('v-');
+    },
+    isEventDirective(attr) {
+      return attr.includes('on:');
+    },
+    updateText(node, value) {
+      node.textContent = typeof value === 'undefined' ? '' : value;
+    },
+    complieText(node, exp) {
+      let initText = this.vm.data[exp];
+      this.updateText(node, initText);
+      new Watcher(this.vm, exp, (value) => {
+        this.updateText(node, value);
+      })
+    },
+    complieElement(node) {
+      let nodeAttrs = node.attributes;
+      Array.prototype.forEach.call(nodeAttrs, (attr) => {
+        const attrName = attr.name;
+        if (this.isDirective(attrName)) {
+          let exp = attr.value;
+          let dir = attrName.substring(2);
+          if (this.isEventDirective(dir)) {
+            this.complieEvent(node, this.vm, exp, dir);
+          } else {
+            this.complieModel(node, this.vm, exp, dir);
+          }
+          node.removeAttribute(attrName);
+        }
+      })
+    },
+    complieEvent(node, vm, exp, dir) {
+      let eventType = dir.split(':')[1];
+      let cb = vm.methods && vm.methods[exp];
+      if (eventType && cb) {
+        node.addEventListener(eventType, cb.bind(vm), false);
+      }
+    },
+    complieModel(node, vm, exp, dir) {
+      let val = this.vm.data[exp];
+      this.modelUpdate(val);
+      new Watcher(this.vm, exp, value => {
+        this.modelUpdate(node, value);
+      })
+      node.addEventListener('input', e => {
+        let newValue = e.target.value;
+        if (val === newValue) {
+          return;
+        }
+        this.vm.data[exp] = newValue;
+        val = newValue;
+      });
+    },
+    modelUpdate(node, value, oldValue) {
+      node.value = typeof value === 'undefined' ? '' : value;
+    }
+  }
 
-  window.setTimeout(function () {
-    console.log('name值改变了');
-    myVue.data.name = 'canfoo';
-  }, 2000);
-
+  let myVue = new MyVue({
+    el: '#app',
+    data: {
+      title: 'hello world',
+      name: 'zqm'
+    },
+    methods: {
+      clickMe() {
+        this.data.title = 'hello world'
+      }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.data.title = '你好'
+      }, 1000);
+    }
+  })
 </script>
 
 </html>
