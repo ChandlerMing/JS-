@@ -4,7 +4,7 @@
  */
 var longestPalindrome = function (s) {
   let arr = ['#', ...s.split('').join('#'), '#'];
-  let maxLenght = 0;
+  let maxLength = 0;
   let resRange = [0, 0];
   for (let i = 0; i < arr.length; i++) {
     let left = i - 1, right = i + 1;
@@ -18,8 +18,8 @@ var longestPalindrome = function (s) {
         break;
       }
     }
-    if (cur > maxLenght) {
-      maxLenght = cur;
+    if (cur > maxLength) {
+      maxLength = cur;
       resRange = [left + 1, right - 1 + 1] // 'right - 1' offsets the final 'right++'. 'right + 1' adapt the slice index.
     }
   }
