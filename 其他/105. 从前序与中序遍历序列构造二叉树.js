@@ -9,14 +9,14 @@ function TreeNode(val) {
  * @param {number[]} inorder
  * @return {TreeNode}
  */
-var buildTree = function (preorder, inorder, process = 0) {
+var buildTree = function (preorder, inorder) {
   if (!preorder.length || !inorder.length) {
     return null;
   }
   let root = new TreeNode(preorder[0]);
-  let pivot = inorder.indexOf(preorder[0]);
-  root.left = buildTree(preorder.slice(1, pivot + 1), inorder.slice(0, pivot), process);
-  root.right = buildTree(preorder.slice(pivot + 1), inorder.slice(pivot + 1), process);
+  let pivot = inorder.indexOf(preorder.shift());
+  root.left = buildTree(preorder, inorder.slice(0, pivot));
+  root.right = buildTree(preorder, inorder.slice(pivot + 1));
   return root;
 };
 
