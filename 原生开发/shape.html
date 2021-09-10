@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="a1"></div>
+  <div class="a2"></div>
+  <div class="a3"></div>
+  <div class="a4"></div>
+  <div class="a5"></div>
+</body>
+<style>
+  div {
+    margin: 100px;
+  }
+  /* 等腰三角形 */
+  .a1 {
+    width: 0px;
+    height: 0px;
+    border-bottom: 50px solid red;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+  }
+
+  /* 等腰梯形 */
+  .a2 {
+    width: 50px;
+    height: 0px;
+    border-bottom: 50px solid red;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+  }
+
+  /* 扇形 */
+  .a3 {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    border-top-left-radius: 50px;
+  }
+
+  /* 圆 */
+  .a4 {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    border-radius: 25px;
+  }
+
+  /* 半圆 */
+  .a5 {
+    width: 100px;
+    height: 50px;
+    background-color: blue;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+  }
+</style>
+
+</html>
