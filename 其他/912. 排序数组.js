@@ -28,8 +28,8 @@ var sortArray = function (nums, left = 0, right = nums.length - 1) {
     arr[left] = arr[right];
     arr[right] = tmp;
   }
-  if (left > right) {
-    return;
+  if (left >= right) {
+    return nums;
   }
   let mid = ~~(left + (right - left) / 2), i = left + 1, j = right;
   let pivot = nums[mid];
