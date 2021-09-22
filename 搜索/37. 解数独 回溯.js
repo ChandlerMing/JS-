@@ -9,6 +9,7 @@ var solveSudoku = function (board) {
       if (board[r][i] === n || board[i][c] === n) {
         return false;
       }
+      // 9 x 9 范围内搜索 巧妙
       if (board[~~(r / 3) * 3 + ~~(i / 3)][~~(c / 3) * 3 + i % 3] === n) {
         return false;
       }
