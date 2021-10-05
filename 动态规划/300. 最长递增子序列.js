@@ -35,4 +35,23 @@ var lengthOfLIS = function (nums) {
   return f.length - 1;
 };
 
-console.log(lengthOfLIS([0, 1, 0, 3, 2, 3]));
+// 二分
+var lengthOfLIS = function (nums) {
+  let top = [nums[0]];
+  for (let i = 1; i < nums.length; i++) {
+    let cur = nums[i];
+    let l = 0, r = top.length - 1;
+    while (l <= r) {
+      const mid = ~~((l + r) / 2);
+      if (cur <= top[mid]) {
+        r = mid - 1;
+      } else {
+        l = mid + 1;
+      }
+    }
+    top[l] = cur;
+  }
+  return top.length;
+};
+
+console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]));
