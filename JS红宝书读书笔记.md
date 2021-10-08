@@ -467,3 +467,35 @@ Number.isSafeInteger((2 ** 53) - 1)       // true
 
 ### 5.4 单例内置对象
 
+#### 5.4.1 Global 对象
+
+​	ECMA-262 规范，所有属性和方法都需要存在于一个对象下，不存在什么全局变量，所谓的全局变量就是 Global 对象的属性。
+
+例如 parseInt(), parseFloat() 之类。
+
+1. URI编码工具
+
+   ```js
+   // 编码
+   encodeURI();	// 不会转义 / ? # 等特殊字符，会转义空格、中文等
+   encodeURIComponent();	// 全部转义
+   // 解码
+   decodeURI();	// 同上
+   decodeURIComponent(); 	// 同上
+   ```
+
+2. eval 方法
+
+   ```js
+   // 原理：用 eval 内部的字符串当作 js 语句，插入到 eval 调用的地方。 严格模式下有 eval 作用域。
+   eval('console.log(123); let msg = 321;') // 123
+   console.log(msg);	// 321
+   
+   "use strict"
+   eval('console.log(123); let msg = 321;') // 123
+   console.log(msg);	// 321
+   ```
+
+3. 
+
+​	
