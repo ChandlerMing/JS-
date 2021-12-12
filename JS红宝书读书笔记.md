@@ -496,6 +496,48 @@ Number.isSafeInteger((2 ** 53) - 1)       // true
    console.log(msg);	// 321
    ```
 
-3. 
+3. Global对象
 
-​	
+   ```js
+   // global存储所谓全局变量的对象
+   global.undefined === undefined // 返回值为true，NaN、Infinity同理
+   global.Array() // 一些内置数据结构的构造函数也都归属于global实例下
+   ```
+
+4. window对象
+
+   ```js
+   // 浏览器环境中的global5.4.2
+   ```
+
+#### 5.4.2 Math对象
+
+1. Math常量值属性（Math.PI等数学相关常量）
+
+2. min() 和 max() 方法（略）
+
+3. 舍入方法
+
+   ```js
+   Math.ceil() // 天花板，向上取整
+   Math.floor() // 地板，向下取整
+   Math.round() // 四舍五入
+   Math.fround() // 返回最接近的32位单精度浮点数（？？？大概用不上）
+   ```
+
+4. random() 方法
+
+   ```js
+   // 返回 (0, 1] 内的随机数，浮点形式
+   // 常用方法
+   function selectFrom(lowerValue, upperValue) {
+     let choice = upperValue - lowerValue;
+     return Math.floor(Math.random() * choices + lowerValue);
+   }
+   console.log(selectFrom(2, 10)) // [2, 10] 内的随机数
+   ```
+
+5. 其他方法 如 Math.abs()、Math.sqrt() 等
+
+## 第六章 集合引用类型
+
