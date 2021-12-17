@@ -6,14 +6,15 @@
 
 const testCase = [
   ['horse', 'ros'],
-  ['ros', 'horse']
-]
+  ['ros', 'horse'],
+];
 /**
- * unoptimized 
+ * unoptimized
  */
-var minDistance = function (word1, word2) {
+let minDistance = function (word1, word2) {
   // step 1: deteminate the direction of transform. ( word1 => word2 )
-  let bound1 = word1.length, bound2 = word2.length;
+  let bound1 = word1.length;
+  let bound2 = word2.length;
   function dp(i, j) {
     if (i === word1.length) {
       return bound2 - j;
@@ -27,13 +28,13 @@ var minDistance = function (word1, word2) {
       return Math.min(
         dp(i, j + 1) + 1, // Inject word2[j]
         dp(i + 1, j) + 1, // Delete word1[i]
-        dp(i + 1, j + 1) + 1, // Change word1[i]
-      )
+        dp(i + 1, j + 1) + 1 // Change word1[i]
+      );
     }
   }
   return dp(0, 0);
 };
 
-console.log(minDistance('horse', 'ros'));
-
-console.log(minDistance("intention", "execution"))
+testCase.forEach(test => {
+  console.log(minDistance(...test));
+});
