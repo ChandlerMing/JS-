@@ -107,4 +107,17 @@ var superEggDrop = function (k, n) {
   return dpTable[k][n];
 };
 
-console.log(superEggDrop(2, 7));
+var superEggDrop = function (k, n) {
+  let dpTable = new Array(k + 1).fill('').map(() => new Array(n + 1).fill(0));
+  let m = 0;
+  while (dpTable[k][m] < n) {
+    m++;
+    for (let i = 1; i <= k; i++) {
+      dpTable[i][m] = dpTable[i][m - 1] + dpTable[i - 1][m - 1] + 1;
+      console.log(m);
+    }
+  }
+  return m;
+};
+
+console.log(superEggDrop(2, 7))
