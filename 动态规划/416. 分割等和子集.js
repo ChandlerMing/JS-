@@ -26,4 +26,26 @@ var canPartition = function (nums) {
   return dp[n][target];
 };
 
+var canPartition = function (nums) {
+  const sum = nums.reduce((acc, cur) => acc + cur);
+  if (sum % 2 !== 0) {
+    return false;
+  }
+  const target = sum / 2;
+  const n = nums.length;
+  const dp = new Array(target + 1).fill(false);
+  // base case
+  dp[0] = true;
+  for (let i = 0; i < n; i++) {
+    for (let j = target; j >= 0; j--) {
+      if (j < nums[i]) {
+        dp[j] = dp[j]
+      } else {
+        dp[j] = dp[j] || dp[j - nums[i]];
+      }
+    }
+  }
+  return dp[target];
+};
+
 console.log(canPartition([1, 5, 11, 5]));
