@@ -24,3 +24,26 @@ var rob = function (root) {
   }
   return Math.max(...dfs(root));
 };
+
+var rob = function (root) {
+  const memo = new Map();
+  const dp = (root) => {
+    // base case
+    if (!root) {
+      return 0;
+    }
+    if (memo.has(root)) {
+      return memo.get(root);
+    }
+    const robCur = root.val +
+      dp(root.left?.left) +
+      dp(root.left?.right) +
+      dp(root.right?.left) +
+      dp(root.right?.right);
+    const robChild = dp(root.left) + dp(root.right);
+    const res = Math.max(robCur, robChild);
+    memo.set(root, res);
+    return res;
+  }
+  return dp(root);
+};
