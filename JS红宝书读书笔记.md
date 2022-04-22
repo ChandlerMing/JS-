@@ -541,3 +541,17 @@ Number.isSafeInteger((2 ** 53) - 1)       // true
 
 ## 第六章 集合引用类型
 
+### 6.1 Object
+
+
+
+
+
+
+
+
+
+
+
+
+
