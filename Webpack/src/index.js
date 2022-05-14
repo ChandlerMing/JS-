@@ -1,0 +1,1 @@
+console.log('webpack`s default entry')
