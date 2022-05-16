@@ -543,6 +543,16 @@ Number.isSafeInteger((2 ** 53) - 1)       // true
 
 ### 6.1 Object
 
+### 6.2 Array
+1. Array.from() 将类数组对象转换为数组
+```js
+Array.from('zqm') // ['z', 'q', 'm']
+const m = new Map().set(1, 2).set(3, 4);
+Array.from(m) // [[1, 2], [3, 4]]
+const n = new Set().add(1).add(2).add(3);
+Array.from(n) // [1, 2, 3]
+```
+
 
 
 
