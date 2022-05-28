@@ -542,6 +542,7 @@ Number.isSafeInteger((2 ** 53) - 1)       // true
 ## 第六章 集合引用类型
 
 ### 6.1 Object
+取对象属性方法：obj.prop 或 obj[prop]
 
 ### 6.2 Array
 1. Array.from() 将类数组对象转换为数组
@@ -551,13 +552,34 @@ const m = new Map().set(1, 2).set(3, 4);
 Array.from(m) // [[1, 2], [3, 4]]
 const n = new Set().add(1).add(2).add(3);
 Array.from(n) // [1, 2, 3]
+// 创建二维数组的一个 trick
+Array.from({ length: 3 }, () => new Array(3).fill(0)); // [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 ```
-
-
-
-
-
-
+2. 避免使用数组空位，必须要用时用显式 undefined 替换
+3. 数组 length 属性 trick
+```js
+let arr = [1, 2, 3];
+// 截断
+arr.length = 2; // [1, 2]
+// 尾加
+arr[length] = 3; // [1, 2, 3]
+```
+4. 检测数组
+```js
+// ES5
+let a = [];
+a instanceof Array // ES5
+Array.isArray(a) // ES6
+```
+5. 迭代器方法拆分键值对
+```js
+const a = [a, b, c, d];
+for (const [idx, element] of a.entries()) {
+   console.log(idx);
+   console.log(element);
+}
+// 0 a 1 b 2 c 3 d
+```
 
 
 
