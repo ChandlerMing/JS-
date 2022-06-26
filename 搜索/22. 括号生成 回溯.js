@@ -1,4 +1,40 @@
 /**
+ * easy to understand
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function (n) {
+  const res = [];
+  if (n === 0) {
+    return res;
+  }
+  backtracking(0, 0, n, '', res)
+  return res;
+};
+
+var backtracking = function (left, right, n, cur, res) {
+  if (left > n || right > n) {
+    return;
+  }
+  if (left < right) {
+    return;
+  }
+  if (cur.length === 2 * n) {
+    res.push(cur);
+    return;
+  }
+
+  cur += '(';
+  backtracking(left + 1, right, n, cur, res);
+  cur = cur.slice(0, -1);
+
+  cur += ')';
+  backtracking(left, right + 1, n, cur, res);
+  cur = cur.slice(0, -1);
+}
+
+/**
+ * compact
  * @param {number} n
  * @return {string[]}
  */
@@ -19,4 +55,4 @@ var generateParenthesis = function (n) {
   return res;
 };
 
-console.log(generateParenthesis(2));
+console.log(generateParenthesis(3));
