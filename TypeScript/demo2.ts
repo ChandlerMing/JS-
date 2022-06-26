@@ -84,8 +84,43 @@ let uniKey: symbol = Symbol();
   slice(1, 2);
 }
 
-// 
+// 对象类型
+{
+  // 单独使用
+  const zqm1: {
+    name: string,
+    age: number,
+    go(task: string, times: number): void,
+    run: (task: string, times: number) => void
+  } = {
+    name: 'zqm',
+    age: 18,
+    go(task, times) {
+      console.log(task, times);
+    },
+    run(task, times) {
+      console.log(task, times);
+    }
+  }
 
+  // 定义类型
+  type Zqm = {
+    name: string,
+    age: number,
+    go(task: string, times: number): void,
+    run: (task: string, times: number) => void
+  }
+  const zqm2: Zqm = {
+    name: 'zqm',
+    age: 18,
+    go(task, times) {
+      console.log(task, times);
+    },
+    run(task, times) {
+      console.log(task, times);
+    }
+  }
+}
 
 
 
