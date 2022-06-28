@@ -122,5 +122,78 @@ let uniKey: symbol = Symbol();
   }
 }
 
+// 接口
+{
+  interface GoodItem {
+    name: string,
+    price: number,
+    func: () => string
+  }
+  const good1: GoodItem = {
+    name: '手表',
+    price: 200,
+    func: () => {
+      return '看时间'
+    }
+  }
+  const good2: GoodItem = {
+    name: '手机',
+    price: 2000,
+    func: () => {
+      return '打电话'
+    }
+  }
+  interface MyGoodItem extends GoodItem {
+    func1: () => string
+  }
+  const good3: MyGoodItem = {
+    name: '电脑',
+    price: 20000,
+    func: () => {
+      return '写代码'
+    },
+    func1: () => {
+      return '打游戏'
+    }
+  }
+  interface MultiGoodItem extends GoodItem, MyGoodItem {
+    func2: () => string
+  }
+  const good4: MultiGoodItem = {
+    name: '服务器',
+    price: 20000,
+    func: () => {
+      return '写代码'
+    },
+    func1: () => {
+      return '打游戏'
+    },
+    func2: () => {
+      return '挖矿'
+    }
+  }
+}
 
+// 元组
+{
+  type Gender = 'gril' | 'boy'
+  let g1: Gender = 'boy';
+  let g2: Gender = 'gril';
+}
 
+// 枚举
+{
+  // 数值枚举 默认为从 0 开始自增的数值
+  enum Direction { 'UP', 'DOWN', 'LEFT', 'RIGHT' }
+  Direction.UP // 0
+  Direction.DOWN // 1
+  Direction.LEFT // 2
+  Direction.RIGHT // 3
+
+  // 字符串枚举
+  enum Direction1 { 'UP' = 'UP', 'DOWN' = 'DOWN', 'LEFT' = 'LEFT', 'RIGHT' = 'RIGHT' }
+  Direction.UP // UP
+  Direction.DOWN // DOWN
+  Direction.LEFT // LEFT
+  Direction.RIGHT // RIGHT
+}
