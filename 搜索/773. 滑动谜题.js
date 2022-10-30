@@ -1,6 +1,6 @@
 /**
  * @param {number[][]} board
- * @return {number}
+ * @return {number}    
  */
 var slidingPuzzle = function (board) {
   const n = 2, m = 3;
