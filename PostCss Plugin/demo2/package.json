@@ -1,0 +1,17 @@
+{
+  "name": "postcss-demo2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.4",
+    "postcss-selector-parser": "^6.0.7",
+    "posthtml": "^0.16.5",
+    "posthtml-parser": "^0.10.1"
+  },
+  "author": "",
+  "license": "ISC"
+}

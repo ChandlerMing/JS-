@@ -1,2 +1,2 @@
 .DS_Store
-/webpack/node_modules
+**/node_modules
